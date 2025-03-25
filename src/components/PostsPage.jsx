@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../css/PostsPage.css";
 
 function PostsPage() {
   const [posts, setPosts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch posts from localStorage
@@ -15,6 +17,15 @@ function PostsPage() {
     updatedPosts[index].approved = true;
     localStorage.setItem("posts", JSON.stringify(updatedPosts));
     setPosts(updatedPosts);
+    navigate("/listed-items"); // Redirect after approval
+  };
+
+  const rejectPost = (index) => {
+    const updatedPosts = [...posts];
+    updatedPosts.splice(index, 1); // Remove the rejected post
+    localStorage.setItem("posts", JSON.stringify(updatedPosts));
+    setPosts(updatedPosts);
+    navigate("/listed-items"); // Redirect after rejection
   };
 
   return (
@@ -48,20 +59,31 @@ function PostsPage() {
                       <img
                         key={i}
                         src={img}
-                        alt="Uploaded"
-                        width="100"
-                        height="100"
+                        alt={`${post.itemName} - Image ${i + 1}`}
                         className="post-image"
+                        style={{
+                          width: "200px",
+                          height: "200px",
+                          objectFit: "cover",
+                        }}
                       />
                     ))}
                   </div>
                 )}
-                <button
-                  className="approve-button"
-                  onClick={() => approvePost(index)}
-                >
-                  Approve
-                </button>
+                <div className="button-group">
+                  <button
+                    className="approve-button"
+                    onClick={() => approvePost(index)}
+                  >
+                    Approve
+                  </button>
+                  <button
+                    className="reject-button"
+                    onClick={() => rejectPost(index)}
+                  >
+                    Reject
+                  </button>
+                </div>
               </div>
             )
         )

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import "../css/FormPage.css";
 
 function FormPage() {
@@ -30,18 +31,33 @@ function FormPage() {
     e.preventDefault();
 
     // Convert images to base64 for local storage
-    const imagesBase64 = formData.images.map((file) =>
-      URL.createObjectURL(file)
-    );
+    Promise.all(
+      formData.images.map((file) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      })
+    ).then((base64Images) => {
+      const newPost = { ...formData, images: base64Images, approved: false };
+      const posts = JSON.parse(localStorage.getItem("posts")) || [];
+      localStorage.setItem("posts", JSON.stringify([...posts, newPost]));
 
-    const newPost = { ...formData, images: imagesBase64, approved: false };
-
-    // Save data in localStorage
-    const posts = JSON.parse(localStorage.getItem("posts")) || [];
-    posts.push(newPost);
-    localStorage.setItem("posts", JSON.stringify(posts));
-
-    navigate("/listed-items"); // Redirect to posts page
+      // Show sweet alert and then redirect
+      Swal.fire({
+        title: "Thank You!",
+        text: "Your donation is greatly appreciated. Please wait patiently while our admin reviews your donation request.",
+        icon: "success",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#2ecc71",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/"); // Redirect to homepage
+        }
+      });
+    });
   };
 
   return (
