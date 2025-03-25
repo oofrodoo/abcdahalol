@@ -1,0 +1,187 @@
+/*******************************/
+/********* Footer CSS **********/
+/*******************************/
+:root {
+  --footer-bg: #20212b;
+  --footer-accent: #fdbe33;
+  --footer-text: #ffffff;
+  --footer-hover: #0968a7;
+  --footer-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer {
+  position: relative;
+  padding-top: 50px;
+  background: var(--footer-bg);
+}
+
+.footer .footer-contact,
+.footer .footer-link,
+.footer .footer-newsletter {
+  position: relative;
+  margin-bottom: 45px;
+  color: var(--footer-text);
+}
+
+.footer .footer-contact h2,
+.footer .footer-link h2,
+.footer .footer-newsletter h2 {
+  margin-bottom: 30px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--footer-accent);
+}
+
+.footer .footer-link a {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--footer-text);
+  transition: var(--footer-transition);
+  position: relative;
+  padding-left: 20px;
+}
+
+.footer .footer-link a::before {
+  position: absolute;
+  left: 0;
+  content: "\f105";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  transition: var(--footer-transition);
+  opacity: 0.8;
+}
+
+.footer .footer-link a:hover {
+  color: var(--footer-hover);
+  letter-spacing: 0.5px;
+  transform: translateX(5px);
+}
+
+.footer .footer-link a:hover::before {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+.footer .footer-contact p {
+  transition: var(--footer-transition);
+}
+
+.footer .footer-contact p:hover {
+  color: var(--footer-hover);
+  transform: translateX(3px);
+}
+
+.footer .footer-contact a {
+  color: var(--footer-text);
+  transition: var(--footer-transition);
+}
+
+.footer .footer-contact i {
+  color: var(--footer-accent);
+  transition: var(--footer-transition);
+}
+
+.footer .footer-contact p:hover i {
+  transform: scale(1.1);
+}
+
+.footer .footer-social {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.footer .footer-social a {
+  width: 40px;
+  height: 40px;
+  padding: 6px 0;
+  transition: var(--footer-transition);
+}
+
+.footer .footer-social a:hover {
+  transform: translateY(-3px);
+  color: var(--footer-accent);
+}
+
+.footer .footer-newsletter form {
+  position: relative;
+  width: 100%;
+}
+
+.footer .footer-newsletter button {
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 800;
+  transition: var(--footer-transition);
+  background-color: var(--footer-accent);
+  color: var(--footer-bg);
+  border: 2px solid var(--footer-accent);
+}
+
+.footer .footer-newsletter button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(253, 190, 51, 0.2);
+  background-color: transparent;
+  color: var(--footer-accent);
+}
+
+.footer .footer-newsletter input {
+  margin-bottom: 15px;
+  height: 50px;
+  border: 2px solid var(--footer-accent);
+  border-radius: 12px;
+  font-size: 18px;
+  transition: var(--footer-transition);
+  background-color: transparent;
+  color: var(--footer-text);
+  padding: 0 15px;
+}
+
+.footer .footer-newsletter input:focus {
+  border-color: var(--footer-hover);
+  box-shadow: 0 0 0 3px rgba(9, 104, 167, 0.1);
+  outline: none;
+}
+
+.footer .copyright {
+  padding: 0 30px;
+}
+
+.footer .copyright .row {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  border-top: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.footer .copyright p {
+  margin: 0;
+  color: #999999;
+  transition: var(--footer-transition);
+}
+
+.footer .copyright p a {
+  color: var(--footer-text);
+  transition: var(--footer-transition);
+}
+
+.footer .copyright p a:hover {
+  color: var(--footer-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (max-width: 767.98px) {
+  .footer .footer-newsletter .btn.btn-custom {
+    width: 100%;
+    font-weight: 600;
+    padding: 6px 0;
+  }
+
+  .footer .copyright p,
+  .footer .copyright .col-md-6:last-child p {
+    margin: 5px 0;
+    text-align: center;
+  }
+}
