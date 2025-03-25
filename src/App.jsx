@@ -26,13 +26,11 @@ export default function App() {
         <Route exact path="/contact" element={<Contact />} />
         <Route exact path="/donate" element={<Donate />} />
         <Route exact path="/signup" element={<SignUp />} />
-        <Route exact path="/admin" element={<Admin />} />
+        <Route exact path="/admin" element={<AdminPage />} />
         <Route exact path="/acceptable-items" element={<AcceptableItems />} />
         <Route exact path="/listed-items" element={<ListedItems />} />
         <Route path="/form" element={<FormPage />} />
         <Route path="/posts" element={<PostsPage />} />
-        <Route path="/admin" element={<AdminPage />} />
-        {/* Catch all route */}
         <Route exact path="*" element={<Navigate to={"/"} />} />
       </Routes>
     </BrowserRouter>

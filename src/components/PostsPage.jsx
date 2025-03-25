@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "../css/PostsPage.css";
 
 function PostsPage() {
   const [posts, setPosts] = useState([]);
@@ -17,51 +18,55 @@ function PostsPage() {
   };
 
   return (
-    <div>
-      <h2>Pending Posts</h2>
+    <div className="posts-container">
+      <h2 className="posts-title">Pending Posts</h2>
       {posts.length > 0 ? (
         posts.map(
           (post, index) =>
             !post.approved && (
-              <div
-                key={index}
-                style={{
-                  border: "1px solid black",
-                  padding: "10px",
-                  marginBottom: "10px",
-                }}
-              >
-                <h3>{post.itemName}</h3>
-                <p>
-                  <strong>Category:</strong> {post.category}
+              <div key={index} className="post-card">
+                <h3 className="post-title">{post.itemName}</h3>
+                <p className="post-info">
+                  <span className="post-label">Category:</span>
+                  <span className="post-text">{post.category}</span>
                 </p>
-                <p>
-                  <strong>Condition:</strong> {post.condition}
+                <p className="post-info">
+                  <span className="post-label">Condition:</span>
+                  <span className="post-text">{post.condition}</span>
                 </p>
-                <p>
-                  <strong>Age:</strong> {post.age} years
+                <p className="post-info">
+                  <span className="post-label">Age:</span>
+                  <span className="post-text">{post.age} years</span>
                 </p>
-                <p>
-                  <strong>Description:</strong> {post.description}
+                <p className="post-info">
+                  <span className="post-label">Description:</span>
+                  <span className="post-text">{post.description}</span>
                 </p>
-                {post.images.length > 0 &&
-                  post.images.map((img, i) => (
-                    <img
-                      key={i}
-                      src={img}
-                      alt="Uploaded"
-                      width="100"
-                      height="100"
-                      style={{ marginRight: "10px" }}
-                    />
-                  ))}
-                <br />
-                <button onClick={() => approvePost(index)}>Approve</button>
+                {post.images.length > 0 && (
+                  <div className="image-gallery">
+                    {post.images.map((img, i) => (
+                      <img
+                        key={i}
+                        src={img}
+                        alt="Uploaded"
+                        width="100"
+                        height="100"
+                        className="post-image"
+                      />
+                    ))}
+                  </div>
+                )}
+                <button
+                  className="approve-button"
+                  onClick={() => approvePost(index)}
+                >
+                  Approve
+                </button>
               </div>
             )
         )
       ) : (
-        <p>No posts available.</p>
+        <p className="no-posts">No posts available.</p>
       )}
     </div>
   );
